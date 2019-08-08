@@ -32,8 +32,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/dalefarnsworth/codeplug/codeplug"
-	l "github.com/dalefarnsworth/codeplug/debug"
+	"github.com/dalefarnsworth-dmr/codeplug"
+	l "github.com/dalefarnsworth-dmr/debug"
 	"github.com/therecipe/qt/core"
 	"github.com/therecipe/qt/widgets"
 )
