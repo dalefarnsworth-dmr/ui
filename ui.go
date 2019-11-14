@@ -2087,7 +2087,10 @@ func (pd *ProgressDialog) SetRange(min int, max int) {
 }
 
 func (pd *ProgressDialog) SetValue(value int) {
-	pd.qWidget.SetValue(value)
+	qw := pd.qWidget
+	if value <= qw.Maximum() {
+		pd.qWidget.SetValue(value)
+	}
 }
 
 func (pd *ProgressDialog) WasCanceled() bool {
