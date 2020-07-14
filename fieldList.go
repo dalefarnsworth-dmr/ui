@@ -444,19 +444,30 @@ func (fnl *fieldNameList) parseMimeData(mimeType string, data *core.QMimeData) (
 }
 
 func fieldNamesToFields(r *codeplug.Record, fieldNames []string, fType codeplug.FieldType) ([]*codeplug.Field, error) {
-	fields := make([]*codeplug.Field, len(fieldNames))
-	for i, name := range fieldNames {
+	fields := make([]*codeplug.Field, 0)
+	for _, name := range fieldNames {
 		f, err := r.NewFieldWithValue(fType, 0, name)
 		if err != nil {
 			return nil, err
 		}
-		fields[i] = r.FindFieldByName(fType, f.String())
-		if fields[i] == nil {
-			fields[i] = f
+		fs := r.FindFieldsByName(fType, f.String())
+		if len(fs) == 0 {
+			fields = append(fields, f)
+			continue
+		}
+		fields = append(fields, fs...)
+	}
+
+	uniqueFields := make([]*codeplug.Field, 0)
+	keys := make(map[*codeplug.Field]bool)
+	for _, f := range fields {
+		if !keys[f] {
+			keys[f] = true
+			uniqueFields = append(uniqueFields, f)
 		}
 	}
 
-	return fields, nil
+	return uniqueFields, nil
 }
 
 func (fnl *fieldNameList) initFieldNameModel(model *core.QStringListModel, r *codeplug.Record, fType codeplug.FieldType) {
