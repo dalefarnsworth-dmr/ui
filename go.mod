@@ -15,6 +15,5 @@ require (
 	github.com/shabbyrobe/xmlwriter v0.0.0-20210324110748-440e98cf0c87 // indirect
 	github.com/tealeg/xlsx/v3 v3.2.3 // indirect
 	github.com/therecipe/qt v0.0.0-20200904063919-c0c124a5770d
-	golang.org/x/sys v0.0.0-20210426230700-d19ff857e887 // indirect
-	golang.org/x/text v0.3.6 // indirect
+	golang.org/x/text v0.3.8 // indirect
 )
